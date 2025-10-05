@@ -1,0 +1,36 @@
+% Parameter
+Am=1; % amplitudo modulasi
+fm=5; %frekuensi modulasi
+Ac=1; %amplitudo carrier
+fc=100; %frekuensi carrier
+freqdev=30; %frekuensi deviasi (selisih fm dengan sinyal carrier saat digabungkan)
+Fs = 1000;        % frekuensi sampling (Hz) - pilih minimal 2x fc
+t = 0:1/Fs:1;     % vektor waktu dari 0 s.d. 1 detik
+
+%persamaan sinyal informasi dan carrier
+x1=Am*sin(2*pi*fm*t);
+x2=Ac*cos(2*pi*fc*t);
+
+%frekuensi modulasi
+y1=fmmod(x1,fc,Fs,freqdev);
+
+%menampilkan sinyal informasi
+subplot(3,1,1); %terdapat 3 baris, kolom ke 1 dan baris ke 1
+plot(t,x1);
+xlabel('Time');
+ylabel('Amplitude');
+title('Information Signal')
+
+%menampilkan sinyal pembawa
+subplot(3,1,2);
+plot(t,x2);
+xlabel('Time');
+ylabel('Amplitude');
+title('Carrier Signal');
+
+%menampilkan sinual hasil modulasi frequency
+subplot(3,1,3);
+plot(t,y1);
+xlabel('Time');
+ylabel('Amplitude');
+title('Frequency Modulation Signal');
